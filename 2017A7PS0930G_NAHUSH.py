@@ -431,7 +431,7 @@ def main():
     print("Agent Enters Wumpus world, Current Location [1, 1]")
 
     while 1:
-        setVisited() ## sets visited tp 0 for all squares. 
+        setVisited() ## sets visited to 0 for all squares. 
         getAns(ag, [0, 0], "Right") ## Agent makes an attempt
 
         if(flag == 1): ## if agent reaches goal then break
