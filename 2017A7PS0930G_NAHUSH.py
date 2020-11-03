@@ -342,7 +342,6 @@ def getAns(ag, prev, did_action):
 
     ag.TakeAction(reverse(did_action)) ## this is effectively going back to previous location, so the agent should do the reverse of its latest action. This situation arises if -
                                        ## none of the adjacent unvisited squares are safe
- 
 
 def setKB():
     global KB
@@ -390,14 +389,14 @@ def setKB():
                 str1 = string1 + " " + "!P" + str(x) + str(y - 1)
                 str2 = string2 + " " + "!W" + str(x) + str(y - 1) 
                 KB.append(str1)
-                KB.append(str2)   
+                KB.append(str2)
             if(y < 4):
                 str1 = string1 + " " + "!P" + str(x) + str(y + 1)
                 str2 = string2 + " " + "!W" + str(x) + str(y + 1)
                 KB.append(str1)
                 KB.append(str2)
 
-    ## Adding rules for atmost one pit and atmost one wumpus. 
+    ## Adding rules for atmost one pit and atmost one wumpus.
     for x in range(1, 5):
         for y in range(1, 5):
             for i in range(1, 5):
@@ -408,12 +407,18 @@ def setKB():
                     string1 = '!P' + str(x) + str(y)
                     string2 = '!P' + str(i) + str(j)
 
-                    KB.append(string1 + " " + string2)
+                    str1 = string1 + " " + string2
+                    str2 = string2 + " " + string1
+                    if str1 not in KB and str2 not in KB:
+                        KB.append(str1)
 
                     string1 = '!W' + str(x) + str(y)
                     string2 = '!W' + str(i) + str(j)
 
-                    KB.append(string1 + " " + string2)
+                    str1 = string1 + " " + string2
+                    str2 = string2 + " " + string1
+                    if str1 not in KB and str2 not in KB:
+                        KB.append(str1)
 
     ## Rule for no pit or wumpus in starting location
 
@@ -427,7 +432,6 @@ def main():
     ag = Agent()
     setKB() ## Sets the initial KB
     setSafe() ## sets the squares to -1 except for [1, 1]
-
     print("Agent Enters Wumpus world, Current Location [1, 1]")
 
     while 1:
