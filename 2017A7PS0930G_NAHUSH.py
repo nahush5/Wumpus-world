@@ -308,7 +308,6 @@ def reverse(act): ## returns the reverse action of the inputted action
 
 def getAns(ag, prev, did_action):
     global flag
-    global callsToDPLL   
 
     if flag == 1: return
 
