@@ -172,9 +172,8 @@ def dpll(clauses, symbolsUnassigned, model, count): ## The dpll algorithm
 
     callsToDPLL += 1
 
-    ## early termination
     if everyClauseIsTrue(clauses): return True
-    if someClauseIsFalse(clauses): return False
+    if someClauseIsFalse(clauses): return False ## early termination
 
     symbolToAssign, value = findPureSymbol(clauses, symbolsUnassigned) ## find pure symbol
 
