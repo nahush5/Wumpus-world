@@ -97,7 +97,7 @@ def setClause(clauses, clause, symbolToAssign, value, model): ## sets a clause t
             if model[string] == 'None':
                 return
         else:
-            if i.find('!') != -1: f =1
+            if i.find('!') != -1: f = 1
             continue
 
     if f == 0:
