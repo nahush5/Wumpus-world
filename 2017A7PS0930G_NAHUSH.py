@@ -104,9 +104,9 @@ def setClause(clauses, clause, symbolToAssign, value, model): ## sets a clause t
         clauses[clause] = value
     else:
         if value == 'True':
-            clauses[clause] = 'False'
+            clauses[clause] = 'False' ## for implementing early termination
         else:
-            clauses[clause] = 'True'
+            clauses[clause] = 'True' ## for implementing early termination
 
     return
 
@@ -120,12 +120,12 @@ def setClauses(clauses, symbolToAssign, count, value, model): ### Sets all claus
             if index != -1:
                 if index >= 1 and clause[index - 1] == '!':
                     if value == 'False':
-                        clauses[clause] = 'True'
+                        clauses[clause] = 'True' ## for implementing early termination
                     else:
                         setClause(clauses, clause, symbolToAssign, value, model)
                 else:
                     if value == 'True':
-                        clauses[clause] = 'True'
+                        clauses[clause] = 'True' ## for implementing early termination
                     else:
                         setClause(clauses, clause, symbolToAssign, value, model)
                 count[clause] -= 1
