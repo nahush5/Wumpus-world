@@ -247,7 +247,6 @@ def reset(clauses, symbolsUnassigned, model, count): ## Resets the dictionaries 
     return clauses, symbolsUnassigned, model, count
 
 def ask(location): ## used for asking whether a square is safe or not. This is used by the agent to make inferences
-    global callsToDPLL
 
     x = location[0]
     y = location[1]
@@ -267,7 +266,7 @@ def ask(location): ## used for asking whether a square is safe or not. This is u
     clauses, symbolsUnassigned, model, count = reset(clauses, symbolsUnassigned, model, count)
     clauses[('P' + string + " " + 'W' + string)] = 'None' ## To check !P ^ !W we must get a false for KB ^ (P V W) by the dpll algorithm
     count[('P' + string + " " + 'W' + string)] = 2 
-    # callsToDPLL = 0
+
     val = dpll(clauses, symbolsUnassigned, model, count) ## asking whether there is a pit or wumpus
 
     if val == False: ## false means the square is safe
@@ -332,9 +331,9 @@ def getAns(ag, prev, did_action):
         if rooms[index] == prev or visited[x0][y0] == 1: continue
 
         i = ask([x0, y0]) # ask whether the location is safe
-
-        if safe[x0][y0] == -1 or safe[x0][y0] == 0 : continue ## if not safe, don't proceed to it and try other adjacent squares
         
+        if i == -1 or i == 0: continue ## if not safe, don't proceed to it and try other adjacent squares
+
         ag.TakeAction(action[index]) ## proceed if safe
         getAns(ag, [x, y], action[index])
 
